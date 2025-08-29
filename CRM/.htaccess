@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /
+
+	# Allow existing files/directories
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+
+	# Route all to index.php
+	RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
+
+# Security headers (optional)
+<IfModule mod_headers.c>
+	Header always set X-Content-Type-Options nosniff
+	Header always set X-Frame-Options SAMEORIGIN
+	Header always set X-XSS-Protection "1; mode=block"
+</IfModule>

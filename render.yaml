@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: smcrm-backend
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DB_HOST
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: DB_PREFIX
+        value: app_
+      - key: DB_PORT
+        value: 3306
+      - key: CI_ENVIRONMENT
+        value: production
+      - key: APP_ENV
+        value: production
