@@ -1,19 +1,6 @@
 {
   "version": 2,
-  "functions": {
-    "api/**/*.php": {
-      "runtime": "vercel-php@0.6.0"
-    }
-  },
   "routes": [
-    { "src": "/install/(.*)", "dest": "/CRM/install/$1" },
-    { "src": "/assets/(.*)", "dest": "/CRM/assets/$1" },
-    { "src": "/files/(.*)", "dest": "/CRM/files/$1" },
-    { "src": "/system/(.*)", "dest": "/CRM/system/$1" },
-    { "src": "/(.*)", "dest": "/api/index.php" }
-  ],
-  "env": {
-    "APP_ENV": "production",
-    "CI_ENVIRONMENT": "production"
-  }
+    { "src": "/(.*)", "dest": "https://smcrm-backend.onrender.com/$1" }
+  ]
 }
