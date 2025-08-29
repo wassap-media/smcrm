@@ -82,7 +82,7 @@ class Database extends Config
 	{
 		parent::__construct();
 
-		// Check for Vercel environment variables
+		// Check for Vercel/Render environment variables
 		if (isset($_ENV['DB_HOST'])) {
 			$this->default['hostname'] = $_ENV['DB_HOST'];
 		}
@@ -98,8 +98,8 @@ class Database extends Config
 		if (isset($_ENV['DB_PREFIX'])) {
 			$this->default['DBPrefix'] = $_ENV['DB_PREFIX'];
 		}
-		if (isset($_ENV['DB_PORT'])) {
-			$this->default['port'] = $_ENV['DB_PORT'];
+		if (isset($_ENV['DB_PORT']) && $_ENV['DB_PORT'] !== '') {
+			$this->default['port'] = (int) $_ENV['DB_PORT'];
 		}
 
 		// Ensure that we always set the database group to 'tests' if
