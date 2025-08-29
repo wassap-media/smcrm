@@ -56,3 +56,4 @@ writable/uploads/
 
 # Third party libraries (optional - remove if you want to include them)
 app/ThirdParty/
+.vercel
