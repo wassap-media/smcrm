@@ -27,7 +27,20 @@ try {
 
         $db_file_path = "../app/Config/Database.php";
         $config_file_path = "../app/Config/App.php";
-        $db_sql_file_path = __DIR__ . "/database.sql";
+        // Try multiple locations in case server working directory differs
+        $sql_candidates = array(
+            __DIR__ . "/database.sql",
+            realpath(__DIR__ . "/database.sql") ?: (__DIR__ . "/database.sql"),
+            (defined('FCPATH') ? FCPATH : __DIR__ . "/../") . "install/database.sql",
+            dirname(__DIR__) . "/install/database.sql"
+        );
+        $db_sql_file_path = "";
+        foreach ($sql_candidates as $candidate) {
+            if ($candidate && is_file($candidate)) {
+                $db_sql_file_path = $candidate;
+                break;
+            }
+        }
         $index_file_path = "../index.php";
 
         if (!is_file($db_file_path)) {
@@ -40,8 +53,8 @@ try {
             exit();
         }
 
-        if (!is_file($db_sql_file_path)) {
-            echo json_encode(array("success" => false, "message" => "The database.sql file could not found in install folder!"));
+        if (!$db_sql_file_path || !is_file($db_sql_file_path)) {
+            echo json_encode(array("success" => false, "message" => "The database.sql file could not be found. Looked in: " . implode(", ", $sql_candidates)));
             exit();
         }
 
