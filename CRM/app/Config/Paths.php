@@ -18,7 +18,7 @@ class Paths
 	 *
 	 * @var string
 	 */
-	public $appDirectory = __DIR__ . '/../../';
+	public $appDirectory = __DIR__ . '/..';
 
 	/**
 	 * The path to the project root directory.
