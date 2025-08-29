@@ -27,7 +27,7 @@ try {
 
         $db_file_path = "../app/Config/Database.php";
         $config_file_path = "../app/Config/App.php";
-        $db_sql_file_path = "database.sql";
+        $db_sql_file_path = __DIR__ . "/database.sql";
         $index_file_path = "../index.php";
 
         if (!is_file($db_file_path)) {
@@ -165,7 +165,7 @@ function verify_rise_purchase_code($code) {
     if (is_file($config_file_path)) {
         $config_file = file_get_contents($config_file_path);
 
-        if (preg_match('/"app_update_url"\s*=>\s*[\'"]([^\'"]+)[\'"]/', $config_file, $matches)) {
+        if (preg_match('/"app_update_url"\s*=>\s*[\'\"]([^\'\"]+)[\'\"]/',$config_file, $matches)) {
             if (isset($matches[1])) {
                 $app_update_url = $matches[1];
             }
