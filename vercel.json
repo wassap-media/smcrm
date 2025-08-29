@@ -1,40 +1,19 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "CRM/index.php",
-      "use": "@vercel/php"
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.6.0"
     }
-  ],
+  },
   "routes": [
-    {
-      "src": "/install/(.*)",
-      "dest": "CRM/install/$1"
-    },
-    {
-      "src": "/assets/(.*)",
-      "dest": "CRM/assets/$1"
-    },
-    {
-      "src": "/files/(.*)",
-      "dest": "CRM/files/$1"
-    },
-    {
-      "src": "/system/(.*)",
-      "dest": "CRM/system/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "CRM/index.php"
-    }
+    { "src": "/install/(.*)", "dest": "/CRM/install/$1" },
+    { "src": "/assets/(.*)", "dest": "/CRM/assets/$1" },
+    { "src": "/files/(.*)", "dest": "/CRM/files/$1" },
+    { "src": "/system/(.*)", "dest": "/CRM/system/$1" },
+    { "src": "/(.*)", "dest": "/api/index.php" }
   ],
   "env": {
     "APP_ENV": "production",
     "CI_ENVIRONMENT": "production"
-  },
-  "functions": {
-    "CRM/index.php": {
-      "maxDuration": 30
-    }
   }
 }
