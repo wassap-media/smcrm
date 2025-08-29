@@ -1,0 +1,48 @@
+# Development files
+*.log
+*.cache
+.env
+.env.*
+!env.example
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Git files
+.git/
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Local development
+writable/logs/
+writable/cache/
+writable/session/
+writable/debugbar/
+
+# Database files
+*.sql
+*.db
+
+# Third party libraries (optional)
+app/ThirdParty/

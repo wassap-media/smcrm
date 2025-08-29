@@ -14,17 +14,20 @@ class App extends BaseConfig {
 
     private function set_base_url() {
         if (!$this->baseURL) {
-
-            $domain = $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
-
-            $domain = preg_replace('/index.php.*/', '', $domain);
-            $domain = strtolower($domain);
-            if (!empty($_SERVER['HTTPS'])) {
-                $this->baseURL = 'https://' . $domain;
-            } elseif (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
-                $this->baseURL = 'https://' . $domain;
+            // Check for Vercel environment
+            if (isset($_ENV['VERCEL_URL'])) {
+                $this->baseURL = 'https://' . $_ENV['VERCEL_URL'];
             } else {
-                $this->baseURL = 'http://' . $domain;
+                $domain = $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
+                $domain = preg_replace('/index.php.*/', '', $domain);
+                $domain = strtolower($domain);
+                if (!empty($_SERVER['HTTPS'])) {
+                    $this->baseURL = 'https://' . $domain;
+                } elseif (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+                    $this->baseURL = 'https://' . $domain;
+                } else {
+                    $this->baseURL = 'http://' . $domain;
+                }
             }
         }
     }
@@ -92,7 +95,7 @@ class App extends BaseConfig {
      * @var string
      */
     
-    public $indexPage = 'index.php';
+    public $indexPage = '';
 
     /**
      * --------------------------------------------------------------------------
@@ -259,7 +262,7 @@ class App extends BaseConfig {
     public $CSPEnabled = false;
 
     /* User configs */
-    public $encryption_key = "6af0c6a89d26fc4";
+    public $encryption_key = "enter_encryption_key";
     public $csrf_protection = true;
     public $temp_file_path = 'files/temp/';
     public $profile_image_path = 'files/profile_images/';

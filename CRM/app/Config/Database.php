@@ -32,12 +32,12 @@ class Database extends Config
 	 */
 	public $default = [
 		'DSN'      => '',
-		'hostname' => '127.0.0.1',
-		'username' => 'rise_user',
-		'password' => 'rise_pass_123',
-		'database' => 'risecrm',
+		'hostname' => 'enter_hostname',
+		'username' => 'enter_db_username',
+		'password' => 'enter_db_password',
+		'database' => 'enter_database_name',
 		'DBDriver' => 'MySQLi',
-		'DBPrefix' => 'app_',
+		'DBPrefix' => 'enter_dbprefix',
 		'pConnect' => false,
 		'DBDebug'  => (ENVIRONMENT !== 'production'),
 		'charset'  => 'utf8',
@@ -81,6 +81,26 @@ class Database extends Config
 	public function __construct()
 	{
 		parent::__construct();
+
+		// Check for Vercel environment variables
+		if (isset($_ENV['DB_HOST'])) {
+			$this->default['hostname'] = $_ENV['DB_HOST'];
+		}
+		if (isset($_ENV['DB_USERNAME'])) {
+			$this->default['username'] = $_ENV['DB_USERNAME'];
+		}
+		if (isset($_ENV['DB_PASSWORD'])) {
+			$this->default['password'] = $_ENV['DB_PASSWORD'];
+		}
+		if (isset($_ENV['DB_NAME'])) {
+			$this->default['database'] = $_ENV['DB_NAME'];
+		}
+		if (isset($_ENV['DB_PREFIX'])) {
+			$this->default['DBPrefix'] = $_ENV['DB_PREFIX'];
+		}
+		if (isset($_ENV['DB_PORT'])) {
+			$this->default['port'] = $_ENV['DB_PORT'];
+		}
 
 		// Ensure that we always set the database group to 'tests' if
 		// we are currently running an automated test suite, so that
