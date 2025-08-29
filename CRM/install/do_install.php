@@ -1,5 +1,9 @@
 <?php
 
+// Temporarily enable verbose errors for installation troubleshooting
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 try {
 
     ini_set('max_execution_time', 300); //300 seconds 
@@ -165,7 +169,7 @@ try {
     }
 } catch (\Exception $ex) {
     error_log(date('[Y-m-d H:i:s e] ') . $ex->getMessage() . PHP_EOL, 3, "../writable/logs/install.log");
-    echo json_encode(array("success" => false, "message" => "Something went wrong. Please check the error log (/writable/logs/install.log) for more details."));
+    echo json_encode(array("success" => false, "message" => "Installer exception: " . $ex->getMessage()));
 }
 
 function verify_rise_purchase_code($code) {
