@@ -26,6 +26,8 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
 
 # Copy application
 COPY CRM /var/www/html/CRM
+# Ensure database.sql is present even if build context filters large files
+COPY CRM/install/database.sql /var/www/html/CRM/install/database.sql
 
 # Create writable directories and set permissions
 RUN mkdir -p /var/www/html/CRM/writable/cache \
