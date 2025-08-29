@@ -4,7 +4,9 @@ FROM php:8.3-apache
 # Install system dependencies for PHP extensions
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-       libicu-dev libzip-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev libxml2-dev \
+       libicu-dev libzip-dev zlib1g-dev \
+       libpng-dev libjpeg62-turbo-dev libfreetype6-dev libxml2-dev \
+       libonig-dev pkg-config \
     && rm -rf /var/lib/apt/lists/*
 
 # Enable Apache modules
