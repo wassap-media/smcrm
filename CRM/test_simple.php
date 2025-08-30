@@ -4,13 +4,13 @@ echo "Testing Supabase connection...\n";
 
 // Test database connection
 try {
-    $host = 'db.peudbzzjqfriqwtyltyi.supabase.co';
+    $host = 'eclqgtdcgbejfpmoaupw.supabase.co';
     $port = 5432;
     $dbname = 'postgres';
     $username = 'postgres';
     $password = 'SM-crm25';
     
-    $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
+    $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;sslmode=require";
     $pdo = new PDO($dsn, $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
