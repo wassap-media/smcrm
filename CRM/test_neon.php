@@ -6,7 +6,7 @@ echo "Testing Neon PostgreSQL connection...\n";
 try {
     $host = 'ep-shiny-star-af00su9z-pooler.c-2.us-west-2.aws.neon.tech';
     $port = 5432;
-    $dbname = 'neondb';
+    $dbname = 'smcrm';
     $username = 'neondb_owner';
     $password = 'npg_L0WiwaDj7fSl';
     
