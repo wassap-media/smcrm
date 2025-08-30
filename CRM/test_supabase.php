@@ -4,9 +4,9 @@ require_once 'vendor/autoload.php';
 
 // Test database connection
 try {
-    $host = 'eclqgtdcgbejfpmoaupw.supabase.co.pooler';
+    $host = 'eclqgtdcgbejfpmoaupw.supabase.co';
     $port = 5432;
-    $dbname = 'postgres';
+    $dbname = 'eclqgtdcgbejfpmoaupw';
     $username = 'postgres';
     $password = 'SM-crm25';
     
