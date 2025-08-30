@@ -105,12 +105,7 @@ class Database extends Config
 		// Switch to PostgreSQL driver for Render deployment or Supabase
 		if (isset($_ENV['DB_HOST']) && (strpos($_ENV['DB_HOST'], 'dpg-') === 0 || strpos($_ENV['DB_HOST'], 'supabase.co') !== false)) {
 			$this->default['DBDriver'] = 'Postgre';
-			// Try connection pooling first, fallback to direct connection
-			if (strpos($_ENV['DB_HOST'], 'supabase.co') !== false) {
-				$this->default['DSN'] = "pgsql:host={$this->default['hostname']}.pooler;port={$this->default['port']};dbname={$this->default['database']};sslmode=require;connect_timeout=30";
-			} else {
-				$this->default['DSN'] = "pgsql:host={$this->default['hostname']};port={$this->default['port']};dbname={$this->default['database']};sslmode=require;connect_timeout=30";
-			}
+			$this->default['DSN'] = "pgsql:host={$this->default['hostname']};port={$this->default['port']};dbname={$this->default['database']};sslmode=prefer;connect_timeout=30";
 		}
 
 		// Ensure that we always set the database group to 'tests' if
