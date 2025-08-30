@@ -1,31 +1,4 @@
 services:
-  # MariaDB Database Service
-  - type: pserv
-    name: smcrm-mariadb
-    env: docker
-    plan: free
-    image: mariadb:11
-    envVars:
-      - key: MYSQL_ROOT_PASSWORD
-        sync: false
-      - key: MYSQL_DATABASE
-        value: risecrm
-      - key: MYSQL_USER
-        value: rise_user
-      - key: MYSQL_PASSWORD
-        sync: false
-      - key: MYSQL_ROOT_HOST
-        value: "%"
-      - key: MYSQL_INITDB_SKIP_TZINFO
-        value: "1"
-    disk:
-      name: mariadb-data
-      mountPath: /var/lib/mysql
-      sizeGB: 1
-    healthCheckPath: /health
-    startCommand: "docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
-
-  # PHP Backend Service
   - type: web
     name: smcrm-backend
     env: docker
@@ -33,13 +6,13 @@ services:
     dockerfilePath: ./Dockerfile
     envVars:
       - key: DB_HOST
-        value: smcrm-mariadb
+        sync: false
       - key: DB_USERNAME
-        value: rise_user
+        sync: false
       - key: DB_PASSWORD
         sync: false
       - key: DB_NAME
-        value: risecrm
+        sync: false
       - key: DB_PREFIX
         value: app_
       - key: DB_PORT
@@ -48,5 +21,3 @@ services:
         value: production
       - key: APP_ENV
         value: production
-      - key: APACHE_DOCUMENT_ROOT
-        value: /var/www/html/CRM
