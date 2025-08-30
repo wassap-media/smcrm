@@ -102,8 +102,8 @@ class Database extends Config
 			$this->default['port'] = (int) $_ENV['DB_PORT'];
 		}
 
-		// Switch to PostgreSQL driver for Render deployment
-		if (isset($_ENV['DB_HOST']) && strpos($_ENV['DB_HOST'], 'dpg-') === 0) {
+		// Switch to PostgreSQL driver for Render deployment or Supabase
+		if (isset($_ENV['DB_HOST']) && (strpos($_ENV['DB_HOST'], 'dpg-') === 0 || strpos($_ENV['DB_HOST'], 'supabase.co') !== false)) {
 			$this->default['DBDriver'] = 'Postgre';
 			$this->default['DSN'] = "pgsql:host={$this->default['hostname']};port={$this->default['port']};dbname={$this->default['database']}";
 		}
