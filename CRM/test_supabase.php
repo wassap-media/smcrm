@@ -4,13 +4,13 @@ require_once 'vendor/autoload.php';
 
 // Test database connection
 try {
-    $host = 'eclqgtdcgbejfpmoaupw.supabase.co';
+    $host = 'eclqgtdcgbejfpmoaupw.supabase.co.pooler';
     $port = 5432;
     $dbname = 'postgres';
     $username = 'postgres';
     $password = 'SM-crm25';
     
-    $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;sslmode=require";
+    $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;sslmode=require;connect_timeout=30";
     $pdo = new PDO($dsn, $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
