@@ -102,6 +102,12 @@ class Database extends Config
 			$this->default['port'] = (int) $_ENV['DB_PORT'];
 		}
 
+		// Switch to PostgreSQL driver for Render deployment
+		if (isset($_ENV['DB_HOST']) && strpos($_ENV['DB_HOST'], 'dpg-') === 0) {
+			$this->default['DBDriver'] = 'Postgre';
+			$this->default['DSN'] = "pgsql:host={$this->default['hostname']};port={$this->default['port']};dbname={$this->default['database']}";
+		}
+
 		// Ensure that we always set the database group to 'tests' if
 		// we are currently running an automated test suite, so that
 		// we don't overwrite live data on accident.
